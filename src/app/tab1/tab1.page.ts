@@ -404,8 +404,8 @@ export class Tab1Page {
             this.selectedUkuran = '';
             this.notes = '';
             this.harga = 0;
-            this.qty = 0;
-            this.qtyDisplay = '0';
+            this.qty = 1;
+            this.qtyDisplay = '1';
           },
         },
       ],
