@@ -260,33 +260,6 @@ export class Tab1Page {
         },
       ],
     },
-
-    {
-      produk: 'Seblak Kering',
-      varian: [
-        {
-          rasa: 'Pedas',
-        },
-        {
-          rasa: 'Extra',
-        },
-      ],
-      ukuran: [
-        {
-          gramasi: 50,
-          harga: 5000,
-        },
-        {
-          gramasi: 100,
-          harga: 7000,
-        },
-        {
-          gramasi: 250,
-          harga: 15000,
-        },
-      ],
-    },
-
     {
       produk: 'Seblak Cikruh',
       varian: [
@@ -309,7 +282,6 @@ export class Tab1Page {
         },
       ],
     },
-
     {
       produk: 'Seblak Kering',
       varian: [
@@ -318,29 +290,6 @@ export class Tab1Page {
         },
         {
           rasa: 'Extra',
-        },
-      ],
-      ukuran: [
-        {
-          gramasi: 50,
-          harga: 5000,
-        },
-        {
-          gramasi: 100,
-          harga: 7000,
-        },
-        {
-          gramasi: 250,
-          harga: 15000,
-        },
-      ],
-    },
-
-    {
-      produk: 'Seblak Cikruh',
-      varian: [
-        {
-          rasa: 'Pedas',
         },
       ],
       ukuran: [
