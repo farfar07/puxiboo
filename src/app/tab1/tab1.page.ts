@@ -13,9 +13,6 @@ export class Tab1Page {
       produk: 'Basreng',
       varian: [
         {
-          rasa: 'Ori',
-        },
-        {
           rasa: 'Pedas',
         },
       ],
@@ -109,7 +106,7 @@ export class Tab1Page {
       ],
     },
     {
-      produk: 'Mie',
+      produk: 'Mie Lidi',
       varian: [
         {
           rasa: 'Ori',
@@ -139,7 +136,7 @@ export class Tab1Page {
       ],
     },
     {
-      produk: 'Makaroni',
+      produk: 'Makaroni Bantat',
       varian: [
         {
           rasa: 'Ori',
@@ -169,9 +166,6 @@ export class Tab1Page {
     {
       produk: 'Siomay',
       varian: [
-        {
-          rasa: 'Ori',
-        },
         {
           rasa: 'Pedas',
         },
@@ -237,7 +231,7 @@ export class Tab1Page {
       ],
     },
     {
-      produk: 'Solondok',
+      produk: 'Slondok',
       varian: [
         {
           rasa: 'Ori',
@@ -332,12 +326,12 @@ export class Tab1Page {
         qty: this.qty,
       });
       this.storage.set('order', this.order);
-      this.selectedProduk = '';
-      this.selectedVarian = '';
+      // this.selectedProduk = '';
+      // this.selectedVarian = '';
       this.selectedUkuran = '';
-      this.harga = 0;
-      this.qty = 0;
-      this.qtyDisplay = '0';
+      // this.harga = 0;
+      this.qty = 1;
+      this.qtyDisplay = '1';
     } else {
       alert('Lengkapi inputan!');
     }

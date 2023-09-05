@@ -16,6 +16,7 @@
             label-placement="stacked"
             fill="outline"
             mode="md"
+            interface="popover"
           >
             <ion-select-option *ngFor="let x of jajanan" [value]="x.produk"
               >{{ x.produk }}</ion-select-option
@@ -28,6 +29,7 @@
             fill="outline"
             mode="md"
             placeholder="Pilih Ukuran"
+            interface="popover"
             (ionChange)="selectUkuran($event)"
           >
             <ion-select-option
@@ -45,6 +47,7 @@
             fill="outline"
             mode="md"
             placeholder="Pilih Rasa"
+            interface="popover"
             (ionChange)="selectVarian($event)"
           >
             <ion-select-option *ngFor="let x of cariVarian()" [value]="x.rasa"
@@ -120,7 +123,7 @@
         <ion-row>
           <ion-col size="12">
             <ion-textarea
-              label="*Notes"
+              label="Notes (Boleh Kosong)"
               labelPlacement="stacked"
               rows="3"
               fill="outline"
