@@ -18,7 +18,9 @@
             mode="md"
             interface="action-sheet"
           >
-            <ion-select-option *ngFor="let x of jajanan" [value]="x.produk"
+            <ion-select-option
+              *ngFor="let x of sortBy('produk')"
+              [value]="x.produk"
               >{{ x.produk }}</ion-select-option
             >
           </ion-select>
@@ -121,7 +123,7 @@
       <!-- button kirim dan send -->
       <ion-grid fixed>
         <ion-row>
-          <ion-col size="12">
+          <!-- <ion-col size="12">
             <ion-textarea
               label="Notes (Boleh Kosong)"
               labelPlacement="stacked"
@@ -130,7 +132,7 @@
               mode="md"
               [(ngModel)]="notes"
             ></ion-textarea>
-          </ion-col>
+          </ion-col> -->
 
           <ion-col size="6">
             <ion-button expand="block" color="success" (click)="kirimOrder()">

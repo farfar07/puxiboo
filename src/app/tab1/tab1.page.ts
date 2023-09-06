@@ -542,17 +542,23 @@ export class Tab1Page {
         x.ukuran * x.qty +
         '%0A';
 
-      jumlahItem += parseInt(x.qty);
+      // jumlahItem += parseInt(x.qty);
     });
-    if (this.notes !== '') {
-      contentPrint += 'Notes: ' + this.notes + '%0A';
-    }
+    // if (this.notes !== '') {
+    //   contentPrint += 'Notes: ' + this.notes + '%0A';
+    // }
 
-    contentPrint += jumlahItem + ' item';
+    // contentPrint += jumlahItem + ' item';
 
     window.open('https://wa.me/6282217310673?text=' + contentPrint);
     // setTimeout(() => {
     //   window.close();
     // }, 100);
+  }
+
+  sortBy(prop: string) {
+    return this.jajanan.sort((a, b) =>
+      a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1
+    );
   }
 }
