@@ -340,7 +340,7 @@ export class Tab1Page {
   }
 
   cariVarian(): any[] {
-    return this.jajanan.find((x) => x.produk === this.selectedProduk)!.varian;
+    return this.jajanan.find((x) => x.produk === this.selectedProduk)?.varian;
   }
 
   selectVarian(ev: any) {
@@ -349,7 +349,7 @@ export class Tab1Page {
   }
 
   cariUkuran(): any[] {
-    return this.jajanan.find((x) => x.produk === this.selectedProduk)!.ukuran;
+    return this.jajanan.find((x) => x.produk === this.selectedProduk)?.ukuran;
   }
 
   selectUkuran(ev: any) {
