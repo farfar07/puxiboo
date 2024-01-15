@@ -1,19 +1,29 @@
-import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AlertController, AnimationController } from '@ionic/angular';
 import { StorageService } from '../services/storage.service';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
+  @ViewChild(IonModal) modal: IonModal | undefined;
+
+  @ViewChild('iconBag', { read: ElementRef }) icon_bag: ElementRef | undefined;
+
+  // Typically referenced to your ion-router-outlet
+  presentingElement: any = null;
   jajanan: any[] = [
     {
       produk: 'Basreng',
+      keterangan: 'Jajanan masa depan',
+      gambar: '../../assets/basreng.jpg',
       varian: [
         {
-          rasa: 'Pedas',
+          rasa: 'P',
         },
       ],
       ukuran: [
@@ -33,9 +43,11 @@ export class Tab1Page {
     },
     {
       produk: 'Makaroni Cikruh',
+      keterangan: 'Jajanan masa depan',
+      gambar: '../../assets/makcik.jpg',
       varian: [
         {
-          rasa: 'Pedas',
+          rasa: 'P',
         },
       ],
       ukuran: [
@@ -55,15 +67,17 @@ export class Tab1Page {
     },
     {
       produk: 'Cimol',
+      keterangan: 'Jajanan masa depan',
+      gambar: '../../assets/cimol.jpg',
       varian: [
         {
-          rasa: 'Ori',
+          rasa: 'O',
         },
         {
-          rasa: 'Pedas',
+          rasa: 'P',
         },
         {
-          rasa: 'Extra',
+          rasa: 'E',
         },
       ],
       ukuran: [
@@ -79,15 +93,17 @@ export class Tab1Page {
     },
     {
       produk: 'Kripca',
+      keterangan: 'Jajanan masa depan',
+      gambar: '../../assets/kripca.jpg',
       varian: [
         {
-          rasa: 'Ori',
+          rasa: 'O',
         },
         {
-          rasa: 'Pedas',
+          rasa: 'P',
         },
         {
-          rasa: 'Extra',
+          rasa: 'E',
         },
       ],
       ukuran: [
@@ -107,21 +123,23 @@ export class Tab1Page {
     },
     {
       produk: 'Mie Lidi',
+      keterangan: 'Jajanan masa depan',
+      gambar: '../../assets/lidi.jpg',
       varian: [
         {
-          rasa: 'Ori',
+          rasa: 'O',
         },
         {
-          rasa: 'Pedas',
+          rasa: 'P',
         },
         {
-          rasa: 'Extra',
+          rasa: 'E',
         },
         {
-          rasa: 'Balado',
+          rasa: 'B',
         },
         {
-          rasa: 'Jagung Manis',
+          rasa: 'JM',
         },
       ],
       ukuran: [
@@ -137,15 +155,17 @@ export class Tab1Page {
     },
     {
       produk: 'Makaroni Bantat',
+      keterangan: 'Jajanan masa depan',
+      gambar: '../../assets/makban.jpg',
       varian: [
         {
-          rasa: 'Ori',
+          rasa: 'O',
         },
         {
-          rasa: 'Pedas',
+          rasa: 'P',
         },
         {
-          rasa: 'Extra',
+          rasa: 'E',
         },
       ],
       ukuran: [
@@ -165,9 +185,11 @@ export class Tab1Page {
     },
     {
       produk: 'Siomay',
+      keterangan: 'Jajanan masa depan',
+      gambar: '../../assets/siomay.jpg',
       varian: [
         {
-          rasa: 'Pedas',
+          rasa: 'P',
         },
       ],
       ukuran: [
@@ -187,9 +209,11 @@ export class Tab1Page {
     },
     {
       produk: 'Usus Krispi',
+      keterangan: 'Jajanan masa depan',
+      gambar: '../../assets/usus.jpg',
       varian: [
         {
-          rasa: 'Pedas',
+          rasa: 'P',
         },
       ],
       ukuran: [
@@ -205,18 +229,20 @@ export class Tab1Page {
     },
     {
       produk: 'Krupuk Galing',
+      keterangan: 'Jajanan masa depan',
+      gambar: '../../assets/krupgal.jpg',
       varian: [
         {
-          rasa: 'Ori',
+          rasa: 'O',
         },
         {
-          rasa: 'Pedas',
+          rasa: 'P',
         },
         {
-          rasa: 'Extra',
+          rasa: 'E',
         },
         {
-          rasa: 'Balado',
+          rasa: 'B',
         },
       ],
       ukuran: [
@@ -232,21 +258,23 @@ export class Tab1Page {
     },
     {
       produk: 'Slondok',
+      keterangan: 'Jajanan masa depan',
+      gambar: '../../assets/slondok.jpg',
       varian: [
         {
-          rasa: 'Ori',
+          rasa: 'O',
         },
         {
-          rasa: 'Pedas',
+          rasa: 'P',
         },
         {
-          rasa: 'Extra',
+          rasa: 'E',
         },
         {
-          rasa: 'Balado',
+          rasa: 'B',
         },
         {
-          rasa: 'Jagung Manis',
+          rasa: 'JM',
         },
       ],
       ukuran: [
@@ -262,9 +290,11 @@ export class Tab1Page {
     },
     {
       produk: 'Seblak Cikruh',
+      keterangan: 'Jajanan masa depan',
+      gambar: '../../assets/sebcik.jpg',
       varian: [
         {
-          rasa: 'Pedas',
+          rasa: 'P',
         },
       ],
       ukuran: [
@@ -284,12 +314,14 @@ export class Tab1Page {
     },
     {
       produk: 'Seblak Kering',
+      keterangan: 'Jajanan masa depan',
+      gambar: '../../assets/sebker.jpg',
       varian: [
         {
-          rasa: 'Pedas',
+          rasa: 'P',
         },
         {
-          rasa: 'Extra',
+          rasa: 'E',
         },
       ],
       ukuran: [
@@ -308,13 +340,6 @@ export class Tab1Page {
       ],
     },
   ];
-
-  selectedProduk = '';
-  selectedVarian = '';
-  selectedUkuran = '';
-  qty = 1;
-  qtyDisplay = '1';
-  harga = 0;
   order: any[] = [];
 
   customAlertOptions = {
@@ -323,111 +348,172 @@ export class Tab1Page {
 
   constructor(
     private alertController: AlertController,
+    private animationController: AnimationController,
     private storage: StorageService
   ) {}
 
+  ngOnInit() {
+    this.presentingElement = document.querySelector('.ion-page');
+  }
   ionViewWillEnter() {
     this.storage.get('order')?.then((res) => {
       if (res !== null) {
         this.order = res;
+        this.hitungTrx();
       }
     });
+
+    // this.storage.clear();
   }
 
-  selectProduk(ev: any) {
-    this.selectedProduk = ev.detail.value;
-    this.cariVarian();
-  }
+  produkTerpilih: any = undefined;
+  ukuranTerpilih = '';
+  rasaTerpilih = '';
+  hargaTerpilih = 0;
+  produkDipilih(produk: any, tipePilihan: string, value: any) {
+    if (produk.produk !== this.produkTerpilih?.produk) {
+      this.produkTerpilih = undefined;
+      this.ukuranTerpilih = '';
+      this.hargaTerpilih = 0;
+      this.rasaTerpilih = '';
+    }
+    this.produkTerpilih = produk;
 
-  cariVarian(): any[] {
-    return this.jajanan.find((x) => x.produk === this.selectedProduk)?.varian;
-  }
+    switch (tipePilihan) {
+      case 'Rasa':
+        if (produk.produk !== this.produkTerpilih.produk) {
+          if (this.rasaTerpilih === value) {
+            this.rasaTerpilih = '';
+          } else {
+            this.rasaTerpilih = value;
+          }
+        } else {
+          this.rasaTerpilih = value;
+        }
 
-  selectVarian(ev: any) {
-    this.selectedVarian = ev.detail.value;
-    this.cariUkuran();
-  }
-
-  cariUkuran(): any[] {
-    return this.jajanan.find((x) => x.produk === this.selectedProduk)?.ukuran;
-  }
-
-  selectUkuran(ev: any) {
-    this.selectedUkuran = ev.detail.value;
-    let x = this.jajanan.find((x) => x.produk === this.selectedProduk)!.ukuran;
-    this.harga = x.find((y: any) => y.gramasi === this.selectedUkuran)!.harga;
-  }
-
-  addmore() {
-    if (
-      this.selectedProduk !== '' &&
-      this.selectedVarian !== '' &&
-      this.selectedUkuran !== '' &&
-      this.qty > 0
-    ) {
-      this.order.push({
-        produk: this.selectedProduk,
-        varian: this.selectedVarian,
-        ukuran: this.selectedUkuran,
-        harga: this.harga,
-        qty: this.qty,
-      });
-      this.storage.set('order', this.order);
-      // this.selectedProduk = '';
-      // this.selectedVarian = '';
-      this.selectedUkuran = '';
-      // this.harga = 0;
-      this.qty = 1;
-      this.qtyDisplay = '1';
-    } else {
-      alert('Lengkapi inputan!');
+        break;
+      case 'Ukuran':
+        if (produk.produk !== this.produkTerpilih.produk) {
+          if (this.ukuranTerpilih.toString() == value.gramasi) {
+            this.ukuranTerpilih = '';
+            this.hargaTerpilih = 0;
+          } else {
+            this.ukuranTerpilih = value.gramasi;
+            this.hargaTerpilih = value.harga;
+          }
+        } else {
+          this.ukuranTerpilih = value.gramasi;
+          this.hargaTerpilih = value.harga;
+        }
+        break;
+      default:
+        break;
     }
   }
+  addToCart() {
+    this.storage.get('order')?.then((res) => {
+      if (res !== null) {
+        let rasa =
+          this.rasaTerpilih === 'O'
+            ? 'Original'
+            : this.rasaTerpilih === 'P'
+            ? 'Pedas'
+            : this.rasaTerpilih === 'E'
+            ? 'Extra Pedas'
+            : this.rasaTerpilih === 'B'
+            ? 'Balado'
+            : this.rasaTerpilih === 'JM'
+            ? 'Jagung Manis'
+            : '';
 
-  async hapusOrder() {
-    const alert = await this.alertController.create({
-      header: 'Hapus Order',
-      message: 'Yakin Hapus Order? Setelah dihapus maka data akan hilang',
+        let i = res.findIndex(
+          (element: any) =>
+            element.produk === this.produkTerpilih.produk &&
+            element.varian === rasa &&
+            element.harga === this.hargaTerpilih
+        );
 
-      buttons: [
-        {
-          text: 'Tidak',
-          role: 'cancel',
-        },
-        {
-          text: 'Ya',
-          handler: () => {
-            this.storage.remove('order');
-            this.order = [];
-            this.selectedProduk = '';
-            this.selectedVarian = '';
-            this.selectedUkuran = '';
-            this.notes = '';
-            this.harga = 0;
-            this.qty = 1;
-            this.qtyDisplay = '1';
-          },
-        },
-      ],
+        if (~i) {
+          res[i].qty++;
+          this.order = res;
+          this.storage.set('order', this.order)?.then(() => {
+            this.produkTerpilih = undefined;
+            this.ukuranTerpilih = '';
+            this.hargaTerpilih = 0;
+            this.rasaTerpilih = '';
+          });
+        } else {
+          this.order.push({
+            produk: this.produkTerpilih.produk,
+            gambar: this.produkTerpilih.gambar,
+            varian:
+              this.rasaTerpilih === 'O'
+                ? 'Original'
+                : this.rasaTerpilih === 'P'
+                ? 'Pedas'
+                : this.rasaTerpilih === 'E'
+                ? 'Extra Pedas'
+                : this.rasaTerpilih === 'B'
+                ? 'Balado'
+                : this.rasaTerpilih === 'JM'
+                ? 'Jagung Manis'
+                : '',
+            ukuran: this.ukuranTerpilih,
+            harga: this.hargaTerpilih,
+            qty: 1,
+          });
+          this.storage.set('order', this.order)?.then(() => {
+            this.produkTerpilih = undefined;
+            this.ukuranTerpilih = '';
+            this.hargaTerpilih = 0;
+            this.rasaTerpilih = '';
+          });
+        }
+      } else {
+        this.order.push({
+          produk: this.produkTerpilih.produk,
+          gambar: this.produkTerpilih.gambar,
+          varian:
+            this.rasaTerpilih === 'O'
+              ? 'Original'
+              : this.rasaTerpilih === 'P'
+              ? 'Pedas'
+              : this.rasaTerpilih === 'E'
+              ? 'Extra Pedas'
+              : this.rasaTerpilih === 'B'
+              ? 'Balado'
+              : this.rasaTerpilih === 'JM'
+              ? 'Jagung Manis'
+              : '',
+          ukuran: this.ukuranTerpilih,
+          harga: this.hargaTerpilih,
+          qty: 1,
+        });
+        this.storage.set('order', this.order)?.then(() => {
+          this.produkTerpilih = undefined;
+          this.ukuranTerpilih = '';
+          this.hargaTerpilih = 0;
+          this.rasaTerpilih = '';
+        });
+      }
+      this.animateIconBag();
+      this.hitungTrx();
     });
-
-    await alert.present();
   }
 
-  inputValidator(evt: any) {
-    setTimeout(() => {
-      if (evt.value.toString() !== '') {
-        let rate = parseInt(evt.value.toString().replace(/[^0-9]/g, ''));
-        this.qty = Math.round(rate);
-        this.qtyDisplay = Intl.NumberFormat('id-ID', {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
-        }).format(rate);
-      } else {
-        this.qty = 0;
-        this.qtyDisplay = '0';
-      }
-    }, 50);
+  emptyCart = 0;
+  async confirmKosongkanKeranjang() {
+    this.emptyCart++;
+    if (this.emptyCart === 2) {
+      this.storage.remove('order');
+      this.order = [];
+      this.emptyCart = 0;
+      this.Subtotal = 0;
+    } else {
+      setTimeout(() => {
+        this.emptyCart = 0;
+      }, 5000);
+    }
   }
 
   async removeItem(produk: any, index: number) {
@@ -451,6 +537,7 @@ export class Tab1Page {
           handler: () => {
             this.order.splice(index, 1);
             this.storage.set('order', this.order);
+            this.hitungTrx();
           },
         },
       ],
@@ -487,6 +574,7 @@ export class Tab1Page {
           handler: (ev: any) => {
             this.order[index].qty = ev.Qty;
             this.storage.set('order', this.order);
+            this.hitungTrx();
           },
         },
       ],
@@ -497,35 +585,6 @@ export class Tab1Page {
   charLength: number = 27;
   notes = '';
   kirimOrder() {
-    // let contentPrint: string = '```';
-    // contentPrint += '-'.repeat(this.charLength) + '%0A';
-    // let grandTotal = 0;
-    // this.order.forEach((x) => {
-    //   contentPrint += x.produk + ' ' + x.varian + ' ' + x.ukuran + 'gr' + '%0A';
-    //   let qty =
-    //     x.qty.toLocaleString('id') + ' x ' + x.harga.toLocaleString('id');
-    //   let total = (x.qty * x.harga).toLocaleString('id');
-    //   contentPrint +=
-    //     qty +
-    //     ' '.repeat(this.charLength - (qty.length + total.length)) +
-    //     total +
-    //     '%0A';
-
-    //   grandTotal += x.qty * x.harga;
-    // });
-    // contentPrint += '-'.repeat(this.charLength) + '%0A';
-    // contentPrint +=
-    //   'Total' +
-    //   ' '.repeat(
-    //     this.charLength -
-    //       ('Total'.length + grandTotal.toLocaleString('id').length)
-    //   ) +
-    //   grandTotal.toLocaleString('id') +
-    //   '\n%0A';
-
-    // contentPrint +=
-    //   '%0A%0Atolong dicek lagi yaaa.%0Akalau dah bener tolong ditransfer ke%0ABCA 1760050306 a/n Muhammad Faris Farhan atau%0A082217310673 a/n Dita Aulya Gandara (spay,dana)%0A```';
-
     let contentPrint = '';
     let jumlahItem = 0;
     this.order.forEach((x) => {
@@ -541,24 +600,48 @@ export class Tab1Page {
         ';' +
         x.ukuran * x.qty +
         '%0A';
-
-      // jumlahItem += parseInt(x.qty);
     });
-    // if (this.notes !== '') {
-    //   contentPrint += 'Notes: ' + this.notes + '%0A';
-    // }
-
-    // contentPrint += jumlahItem + ' item';
 
     window.open('https://wa.me/6282217310673?text=' + contentPrint);
-    // setTimeout(() => {
-    //   window.close();
-    // }, 100);
+    this.storage.remove('order');
+    this.order = [];
+    this.emptyCart = 0;
+    this.Subtotal = 0;
   }
 
   sortBy(prop: string) {
     return this.jajanan.sort((a, b) =>
       a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1
     );
+  }
+
+  cancel() {
+    this.modal?.dismiss(null, 'cancel');
+  }
+
+  Subtotal = 0;
+  hitungTrx() {
+    this.Subtotal = 0;
+    this.order?.forEach((x: any) => {
+      let harga = x.harga;
+      let qty = x.qty;
+      let subTotal = harga * qty;
+
+      this.Subtotal += Math.round(subTotal);
+    });
+  }
+
+  async animateIconBag() {
+    const animation = this.animationController
+      .create()
+      .addElement(this.icon_bag?.nativeElement)
+      .duration(500)
+      .keyframes([
+        { offset: 0, transform: 'scale(1)' },
+        { offset: 0.5, transform: 'scale(1.5)' },
+        { offset: 0.8, transform: 'scale(0.9)' },
+        { offset: 1, transform: 'scale(1)' },
+      ]);
+    animation.play();
   }
 }

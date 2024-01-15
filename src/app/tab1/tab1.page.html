@@ -1,149 +1,250 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>PO Puxiboo</ion-title>
+    <ion-title>
+      <h1 class="title">Puxiboo</h1>
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button id="open-modal">
+        <ion-icon slot="start" name="bag" #iconBag></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list lines="none" class="ion-margin">
-    <ion-grid fixed class="kandang">
-      <ion-row>
-        <ion-col size="6">
-          <ion-select
-            placeholder="Pilih Produk"
-            (ionChange)="selectProduk($event)"
-            [value]="selectedProduk"
-            label-placement="stacked"
-            fill="outline"
-            mode="md"
-            interface="action-sheet"
-          >
-            <ion-select-option
-              *ngFor="let x of sortBy('produk')"
-              [value]="x.produk"
-              >{{ x.produk }}</ion-select-option
-            >
-          </ion-select>
-
-          <ion-select
-            label-placement="stacked"
-            fill="outline"
-            mode="md"
-            placeholder="Pilih Ukuran"
-            interface="action-sheet"
-            (ionChange)="selectUkuran($event)"
-          >
-            <ion-select-option
-              *ngFor="let x of cariUkuran()"
-              [value]="x.gramasi"
-              >{{ x.gramasi| number:'0.0-0' }} gr - Rp {{ x.harga|
-              number:'0.0-0' }}</ion-select-option
-            >
-          </ion-select>
-        </ion-col>
-        <ion-col size="6">
-          <ion-select
-            label-placement="stacked"
-            fill="outline"
-            mode="md"
-            placeholder="Pilih Rasa"
-            interface="action-sheet"
-            (ionChange)="selectVarian($event)"
-          >
-            <ion-select-option *ngFor="let x of cariVarian()" [value]="x.rasa"
-              >{{ x.rasa }}</ion-select-option
-            >
-          </ion-select>
-
-          <ion-input
-            *ngIf="selectedUkuran !== ''"
-            fill="outline"
-            mode="md"
-            type="tel"
-            placeholder="Qty"
-            [(ngModel)]="qtyDisplay"
-            (keyup)="inputValidator($event.target)"
-          ></ion-input>
-        </ion-col>
-        <ion-col size="12">
-          <ion-button (click)="addmore()" mode="ios" expand="block">
-            Simpan
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <br />
-    <ng-container *ngIf="order.length > 0">
-      <!-- table order -->
-      <ion-grid fixed class="kandang">
-        <ion-row class="row-header">
-          <ion-col size="9">
-            <ion-item>
-              <ion-label>PRODUK</ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col size="3" class="ion-text-right">
-            <ion-item class="ion-text-right">
-              <ion-label>QTY</ion-label>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row *ngFor="let x of order; let i=index;">
-          <ion-col size="9">
-            <ion-item (click)="removeItem(x, i)">
-              <ion-label>
-                {{ i+1 }}. {{ x.produk }} {{ x.varian }} {{ x.ukuran|
-                number:'0.0-0' }}gr
-              </ion-label>
-            </ion-item>
-          </ion-col>
-
-          <ion-col size="3" class="ion-text-right">
-            <ion-item class="ion-text-right" (click)="changeQty(x, i)">
-              <ion-label>{{ x.qty | number:'0.0-0'}}</ion-label>
-            </ion-item>
-            <ion-icon
-              (click)="removeItem(x, i)"
-              style="
-                position: absolute;
-                right: 3px;
-                top: 33%;
-                z-index: 999;
-                font-size: larger;
+  <ion-grid fixed class="ion-no-padding">
+    <!-- produk ada dan sudah tidak loading tampilan GRID-->
+    <ion-row>
+      <ion-col
+        size-xs="12"
+        size-sm="6"
+        size-md="6"
+        size-lg="6"
+        size-xl="4"
+        *ngFor="let produk of sortBy('produk'); let i = index"
+      >
+        <div class="card-produk">
+          <ion-item lines="none">
+            <ion-thumbnail slot="start">
+              <img
+                [src]="produk.gambar !== '' ? produk.gambar : '../../assets/kopi-dalgona.jpeg'"
+              />
+            </ion-thumbnail>
+            <ion-label class="ion-text-wrap label-height">
+              <h6
+                [style]="
+                produk.produk.length < 18
+                  ? 'max-height:23px !important;'
+                  : ''
               "
-              color="danger"
-              name="close-circle"
-            ></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+              >
+                {{ produk.produk }}
+              </h6>
+              <!-- <h5
+                [style]="
+                produk.produk.length < 18
+                  ? 'max-height : 33px !important;'
+                  : ''
+              "
+              >
+                {{ produk.keterangan }}
+              </h5> -->
+              <h4
+                *ngIf="produk.produk === produkTerpilih?.produk && hargaTerpilih !== 0"
+              >
+                Rp {{ hargaTerpilih > 999 ? hargaTerpilih/1000 + 'k' :
+                hargaTerpilih | number:'0.0-0' }}
+              </h4>
+            </ion-label>
+          </ion-item>
+          <ion-grid class="ion-no-padding">
+            <ion-row>
+              <ion-col>
+                <ion-label
+                  style="
+                    padding-left: 16px;
+                    font-weight: bolder;
+                    font-size: 13px;
+                  "
+                >
+                  Rasa
+                </ion-label>
+                <ion-item lines="none">
+                  <ion-chip
+                    [color]="produk.produk === produkTerpilih?.produk && x.rasa === rasaTerpilih ? 'warning': 'primary'"
+                    mode="ios"
+                    *ngFor="let x of produk.varian"
+                    (click)="produkDipilih(produk, 'Rasa', x.rasa)"
+                  >
+                    <ion-label>{{ x.rasa }}</ion-label>
+                  </ion-chip>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-label
+                  style="
+                    padding-left: 16px;
+                    font-weight: bolder;
+                    font-size: 13px;
+                  "
+                >
+                  Ukuran
+                </ion-label>
+                <ion-item lines="none">
+                  <ion-chip
+                    [color]="produk.produk === produkTerpilih?.produk && x.gramasi === ukuranTerpilih ? 'warning': 'primary'"
+                    mode="ios"
+                    *ngFor="let x of produk.ukuran"
+                    (click)="produkDipilih(produk, 'Ukuran', x)"
+                  >
+                    <ion-label>{{ x.gramasi }}g</ion-label>
+                  </ion-chip>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-item
+            lines="none"
+            mode="md"
+            button
+            class="btn-tmbh"
+            [disabled]="produk.produk !== produkTerpilih?.produk || (produkTerpilih === undefined || ukuranTerpilih === '' || rasaTerpilih === '')"
+            (click)="addToCart()"
+          >
+            <ion-label class="ion-text-center">Tambah</ion-label>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-      <!-- button kirim dan send -->
-      <ion-grid fixed>
-        <ion-row>
-          <!-- <ion-col size="12">
-            <ion-textarea
-              label="Notes (Boleh Kosong)"
-              labelPlacement="stacked"
-              rows="3"
-              fill="outline"
-              mode="md"
-              [(ngModel)]="notes"
-            ></ion-textarea>
-          </ion-col> -->
+  <ion-modal trigger="open-modal" [presentingElement]="presentingElement">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Keranjang</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-list lines="none">
+          <div class="order-summmary">
+            <!-- info order -->
+            <div class="order-info" #scrollMe>
+              <!-- order adaan -->
+              <ng-container *ngIf="order.length > 0">
+                <!-- list product order -->
+                <div
+                  class="list-belanja"
+                  *ngFor="let produk of order; let i = index"
+                >
+                  <ion-item-sliding>
+                    <ion-item-options side="start">
+                      <ion-item-option
+                        color="danger"
+                        (click)="removeItem(produk, i)"
+                      >
+                        <ion-icon slot="icon-only" name="trash"></ion-icon>
+                      </ion-item-option>
+                    </ion-item-options>
 
-          <ion-col size="6">
-            <ion-button expand="block" color="success" (click)="kirimOrder()">
-              Kirim Order
-            </ion-button>
-          </ion-col>
-          <ion-col size="6">
-            <ion-button expand="block" (click)="hapusOrder()" color="danger">
-              Hapus Order
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ng-container>
-  </ion-list>
+                    <ion-item>
+                      <ion-thumbnail slot="start">
+                        <img
+                          [src]="produk.gambar !== '' ? produk.gambar : '../../assets/kopi-dalgona.jpeg'"
+                        />
+                      </ion-thumbnail>
+                      <ion-label class="pesanan">
+                        {{ produk.produk }} {{ produk.varian }} ({{
+                        produk.ukuran }}gr)
+                        <br />
+                        <br />
+                        Rp{{ produk.harga | number : "0.0-0" }} x {{ produk.qty
+                        | number : "0.0-0" }}
+                        <ion-text class="ion-text-right harga-produk">
+                          &nbsp;Rp{{ produk.qty * produk.harga | number :
+                          "0.0-0" }}
+                        </ion-text>
+                        <ion-badge mode="md" (click)="changeQty(produk,i)">
+                          Ubah Quantity
+                        </ion-badge>
+                      </ion-label>
+                    </ion-item>
+
+                    <ion-item-options side="end">
+                      <ion-item-option
+                        color="danger"
+                        (click)="removeItem(produk, i)"
+                      >
+                        <ion-icon slot="icon-only" name="trash"></ion-icon>
+                      </ion-item-option>
+                    </ion-item-options>
+                  </ion-item-sliding>
+                </div>
+
+                <!-- subtotal dll -->
+                <ion-item>
+                  <ion-label>Subtotal</ion-label>
+                  <ion-label class="ion-text-right">
+                    Rp{{ Subtotal | number : "0.0-0" }}
+                  </ion-label>
+                </ion-item>
+                <ion-item class="empty-product">
+                  <ion-label color="danger" class="ion-text-wrap">
+                    *Harga Belum Termasuk Ongkir dan Packing (Bila ada)
+                  </ion-label>
+                </ion-item>
+
+                <div class="line" *ngIf="emptyCart === 0"></div>
+                <ion-item
+                  (click)="confirmKosongkanKeranjang()"
+                  class="ion-text-center empty-product"
+                  [ngClass]="{ 'kosongkan-keranjang': emptyCart === 1 }"
+                >
+                  <ion-label color="danger">
+                    {{ emptyCart === 1 ? "Konfirmasi" : "Kosongkan Keranjang" }}
+                  </ion-label>
+                </ion-item>
+                <div class="line" *ngIf="emptyCart === 0"></div>
+              </ng-container>
+
+              <!-- order details empty -->
+              <ng-container *ngIf="order.length === 0">
+                <div class="line"></div>
+                <ion-item class="ion-text-center empty-product">
+                  <ion-label> Tidak ada produk di keranjang </ion-label>
+                </ion-item>
+                <div class="line"></div>
+              </ng-container>
+            </div>
+          </div>
+        </ion-list>
+      </ion-content>
+      <ion-footer *ngIf="order.length > 0">
+        <ion-toolbar>
+          <div class="btn-footer">
+            <ion-grid class="ion-no-padding">
+              <ion-row>
+                <!-- mun mode portrait -->
+                <ng-container>
+                  <ion-col size="2"> </ion-col>
+                  <ion-col size="8">
+                    <ion-item button (click)="kirimOrder()">
+                      <ion-label
+                        >Checkout Rp{{ Subtotal | number : "0.0-0" }}</ion-label
+                      >
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="2"> </ion-col>
+                </ng-container>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
 </ion-content>

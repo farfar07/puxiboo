@@ -1,19 +1,332 @@
-.row-header {
-  border-bottom: 1px solid white;
+* {
+  font-family: "Quicksand", sans-serif !important;
+}
 
-  ion-label {
-    font-weight: bold;
+ion-header {
+  ion-toolbar {
+    --background: #f8f8f8f8;
+    ion-title {
+      .title {
+        font-weight: bolder;
+        font-size: 20px;
+        color: #472323;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .subtitle {
+        font-family: "Josefin Sans", sans-serif;
+        font-size: 12px;
+        color: #ccc3c3;
+        margin-top: 0;
+      }
+    }
+
+    ion-searchbar {
+      font-size: 12px;
+      margin: auto;
+      height: 100%;
+      padding-bottom: 0px;
+      padding-left: 20px;
+      padding-right: 20px;
+      --background: #ffffff;
+      --border-radius: 10px;
+      --box-shadow: 0;
+      --color: #472323;
+      --icon-color: #ccc3c3;
+      --placeholder-color: #ccc3c3;
+      --clear-button-color: #ccc3c3;
+      --placeholder-opacity: 1;
+    }
+
+    ion-list-header {
+      padding-left: 20px;
+      ion-label {
+        font-weight: bolder;
+        font-size: 14px;
+        color: #472323;
+      }
+
+      .jumlah-produk {
+        color: #ccc3c3;
+        margin-right: 20px;
+      }
+    }
   }
 }
 
-ion-label {
-  font-size: 12px;
-  white-space: break-spaces;
+ion-content {
+  --background: #f8f8f8f8;
 }
 
-.kandang {
-  padding: 0;
-  margin: auto;
-  border: 1px solid darkgray;
-  border-radius: 10px;
+.card-produk {
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0px 3px 19px 0px rgba(230, 205, 205, 0.3);
+  margin: 5px 8px 8px 8px;
+  min-width: 200px;
+  min-height: 135px;
+  padding-bottom: 10px;
+
+  ion-thumbnail {
+    min-width: 82px;
+    min-height: 97px;
+    object-fit: cover;
+    border: 1px solid;
+    border-color: #cccbc9;
+    --border-radius: 15px;
+  }
+
+  ion-item {
+    --background: transparent;
+
+    ion-label {
+      font-weight: 800;
+      h6 {
+        color: #000000;
+        font-size: 15px;
+        font-weight: bold;
+
+        text-transform: none;
+        max-height: 40px;
+      }
+
+      h5 {
+        color: #a79d9b;
+        font-size: 14px;
+        font-weight: normal;
+        margin-bottom: 5px;
+
+        max-height: 28px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+
+      h4 {
+        font-size: 18px;
+        font-weight: bolder;
+        color: #000000;
+        // padding-bottom: 10px;
+        // max-height: 20px;
+        position: absolute;
+        bottom: 10px;
+      }
+
+      .harga-coret {
+        color: #784e3e;
+        sup {
+          text-decoration: line-through;
+          color: #cccbc9;
+        }
+      }
+    }
+
+    .label-height {
+      height: 97px;
+    }
+  }
+
+  .btn-tmbh {
+    --min-height: 32px;
+    --color: white;
+
+    border: 1px solid #cccbc9;
+    background: #e06f2b;
+
+    border-radius: 100px;
+    max-width: 200px;
+    margin: auto;
+    margin-top: 13px !important;
+    margin-bottom: 10px !important;
+  }
+
+  div.edit-qty {
+    display: flex;
+    justify-content: center;
+
+    .button-style {
+      --color: white;
+      background: #e06f2b;
+      border-radius: 25px;
+      border: 1px solid #cccbc9;
+    }
+
+    ion-item {
+      --min-height: 32px;
+      ion-icon {
+        margin: 8px 0 8px 0;
+      }
+    }
+  }
+}
+
+ion-modal {
+  ion-content {
+    --background: #ffffff;
+    ion-list {
+      .order-summmary {
+        ion-item {
+          --padding-start: 13px;
+          --min-height: 27px;
+          ion-label {
+            color: #000;
+            font-family: Quicksand !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+
+            margin: 0;
+          }
+        }
+
+        .order-info {
+          // height: calc(100vh - 233px);
+          overflow-y: scroll;
+          margin-top: 3px;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+
+          background: /* Shadow covers */ linear-gradient(
+              white 30%,
+              rgba(255, 255, 255, 0)
+            ),
+            linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%,
+            /* Shadows */
+              radial-gradient(
+                farthest-side at 50% 0,
+                rgba(204, 203, 201, 0.4),
+                rgba(0, 0, 0, 0)
+              ),
+            radial-gradient(
+                farthest-side at 50% 100%,
+                rgba(204, 203, 201, 0.4),
+                rgba(0, 0, 0, 0)
+              )
+              0 100%;
+          background-repeat: no-repeat;
+          background-color: white;
+          background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+          background-attachment: local, local, scroll, scroll;
+
+          .list-belanja {
+            ion-item {
+              --min-height: 10px;
+              padding-bottom: 7px;
+            }
+
+            ion-thumbnail {
+              min-width: 50px;
+              min-height: 50px;
+              margin-bottom: 0;
+              object-fit: cover;
+              border: 1px solid;
+              border-color: #cccbc9;
+              background: #cccbc9;
+              --border-radius: 15px;
+
+              ion-label {
+                display: flex;
+                height: 100%;
+                justify-content: center;
+                align-items: center;
+                font-size: 17px;
+                font-weight: bold;
+                color: white;
+              }
+            }
+            .pesanan {
+              color: #000;
+              font-family: Quicksand;
+              font-size: 13px;
+              font-weight: 600;
+
+              ion-badge {
+                border-radius: 4px;
+                background: #f5efef;
+                color: #784e3e;
+                font-family: Quicksand;
+                font-size: 9px;
+                font-weight: 700;
+                height: 16px;
+                margin-left: 20px;
+                vertical-align: middle;
+              }
+
+              .harga-produk {
+                position: absolute;
+                right: 13px;
+                color: #787b80;
+              }
+            }
+
+            .notes {
+              margin-left: 72px;
+              ion-label {
+                text-align: justify !important;
+                ion-text {
+                  font-style: italic;
+                  color: #784e3e;
+                  white-space: break-spaces;
+                }
+              }
+            }
+          }
+
+          .total-belanja {
+            ion-label {
+              font-size: 13px;
+              font-weight: 700;
+            }
+          }
+
+          .empty-product {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            ion-label {
+              color: #ccc3c3;
+            }
+          }
+
+          .kosongkan-keranjang {
+            --background: red;
+            --min-height: 44px;
+            border-radius: 10px;
+            margin: 0 !important;
+
+            ion-label {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .btn-footer {
+    width: -webkit-fill-available;
+    display: flex;
+
+    ion-item {
+      --min-height: 55px;
+      --color: white;
+      --background: #e06f2b;
+      border: 2px solid #cccbc9;
+      border-radius: 25px;
+      text-align: center;
+
+      ion-icon {
+        margin-right: 7px;
+      }
+
+      ion-label {
+        font-family: "Quicksand", sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        margin: 0;
+      }
+    }
+  }
 }
