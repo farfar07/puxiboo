@@ -18,6 +18,30 @@ export class Tab1Page implements OnInit {
   presentingElement: any = null;
   jajanan: any[] = [
     {
+      produk: 'Kripset Cikruh',
+      keterangan: 'Jajanan masa depan',
+      gambar: '../../assets/kripset.jpg',
+      varian: [
+        {
+          rasa: 'P',
+        },
+      ],
+      ukuran: [
+        {
+          gramasi: 50,
+          harga: 5000,
+        },
+        {
+          gramasi: 100,
+          harga: 7000,
+        },
+        {
+          gramasi: 250,
+          harga: 15000,
+        },
+      ],
+    },
+    {
       produk: 'Basreng',
       keterangan: 'Jajanan masa depan',
       gambar: '../../assets/basreng.jpg',
@@ -219,11 +243,11 @@ export class Tab1Page implements OnInit {
       ukuran: [
         {
           gramasi: 100,
-          harga: 10000,
+          harga: 11000,
         },
         {
           gramasi: 250,
-          harga: 21500,
+          harga: 22000,
         },
       ],
     },

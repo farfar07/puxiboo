@@ -112,7 +112,9 @@
             [disabled]="produk.produk !== produkTerpilih?.produk || (produkTerpilih === undefined || ukuranTerpilih === '' || rasaTerpilih === '')"
             (click)="addToCart()"
           >
-            <ion-label class="ion-text-center">Tambah</ion-label>
+            <ion-label class="ion-text-center">
+              Add To <ion-icon name="bag"></ion-icon>
+            </ion-label>
           </ion-item>
         </div>
       </ion-col>
