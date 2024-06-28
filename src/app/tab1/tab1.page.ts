@@ -113,6 +113,10 @@ export class Tab1Page implements OnInit {
           gramasi: 100,
           harga: 7000,
         },
+        {
+          gramasi: 250,
+          harga: 16000,
+        },
       ],
     },
     {
@@ -213,6 +217,9 @@ export class Tab1Page implements OnInit {
       gambar: '../../assets/siomay.jpg',
       varian: [
         {
+          rasa: 'O',
+        },
+        {
           rasa: 'P',
         },
       ],
@@ -229,6 +236,10 @@ export class Tab1Page implements OnInit {
           gramasi: 250,
           harga: 15000,
         },
+        {
+          gramasi: 500,
+          harga: 25000,
+        },
       ],
     },
     {
@@ -236,6 +247,9 @@ export class Tab1Page implements OnInit {
       keterangan: 'Jajanan masa depan',
       gambar: '../../assets/usus.jpg',
       varian: [
+        {
+          rasa: 'O',
+        },
         {
           rasa: 'P',
         },
